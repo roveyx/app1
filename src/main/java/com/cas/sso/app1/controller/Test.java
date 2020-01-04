@@ -18,7 +18,7 @@ public class Test {
     @RequestMapping("/aa")
     @ResponseBody
     public String hello() {
-        System.out.println("ddddddddddddddddd");
+        System.out.println("ddddddddddddddd");
         return "bbbbbb";
     }
 
