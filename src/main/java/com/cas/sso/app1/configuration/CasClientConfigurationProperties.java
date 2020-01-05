@@ -42,7 +42,15 @@ public class CasClientConfigurationProperties {
      * 自定义UrlPatternMatcherStrategy验证
      */
     private String ignoreUrlPatternType;
+    private String exceptPaths;
 
+    public String getExceptPaths() {
+        return exceptPaths;
+    }
+
+    public void setExceptPaths(String exceptPaths) {
+        this.exceptPaths = exceptPaths;
+    }
 
     public String getServerUrlPrefix() {
         return serverUrlPrefix;

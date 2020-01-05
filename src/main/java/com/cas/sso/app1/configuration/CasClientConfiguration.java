@@ -42,7 +42,7 @@ public class CasClientConfiguration {
         initParameters.put("casServerUrlPrefix", configProps.getServerUrlPrefix());
         registration.setInitParameters(initParameters);
         // 设定加载的顺序
-        registration.setOrder(1);
+        registration.setOrder(0);
         return registration;
     }
 
@@ -73,26 +73,29 @@ public class CasClientConfiguration {
     @Bean
     public FilterRegistrationBean filterAuthenticationRegistration() {
         final FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new AuthenticationFilter());
-        // 设定匹配的路径
-        registration.addUrlPatterns("/*");
+        registration.setFilter(new ReAuthenticationFilter());
+
 
         Map<String,String>  initParameters = new HashMap<String, String>();
         initParameters.put("casServerLoginUrl", configProps.getServerLoginUrl());
         initParameters.put("serverName", configProps.getClientHostUrl());
-
         if(configProps.getIgnorePattern() != null && !"".equals(configProps.getIgnorePattern())){
             initParameters.put("ignorePattern", configProps.getIgnorePattern());
         }
-
         //自定义UrlPatternMatcherStrategy 验证规则
         if(configProps.getIgnoreUrlPatternType() != null && !"".equals(configProps.getIgnoreUrlPatternType())){
             initParameters.put("ignoreUrlPatternType", configProps.getIgnoreUrlPatternType());
         }
-
-        registration.setInitParameters(initParameters);
+        if(configProps.getExceptPaths() != null && !"".equals(configProps.getExceptPaths())){
+            System.out.println("我设置了过滤的地址是-----"+configProps.getExceptPaths());
+            initParameters.put("exceptPaths", configProps.getExceptPaths());
+        }
+        // 设定匹配的路径
+        // registration.addUrlPatterns("/*");
         // 设定加载的顺序
         registration.setOrder(3);
+        registration.setInitParameters(initParameters);
+
         return registration;
     }
 
