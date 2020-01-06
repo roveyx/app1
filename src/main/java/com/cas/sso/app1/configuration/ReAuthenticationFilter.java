@@ -28,7 +28,7 @@ public class ReAuthenticationFilter extends AbstractCasFilter {
     private String[] excludePaths;
 
     @Override
-    protected void initInternal(FilterConfig filterConfig)throws ServletException {
+    protected void initInternal(FilterConfig filterConfig) throws ServletException {
         if (!isIgnoreInitConfiguration()) {
             super.initInternal(filterConfig);
             setCasServerLoginUrl(getPropertyFromInitParams(filterConfig,
@@ -57,7 +57,7 @@ public class ReAuthenticationFilter extends AbstractCasFilter {
         }
         //拦截器过滤修改************begin*************************
         String _excludePaths = getPropertyFromInitParams(filterConfig, "exceptPaths", null);
-        if(CommonUtils.isNotBlank(_excludePaths)){
+        if (CommonUtils.isNotBlank(_excludePaths)) {
             excludePaths = _excludePaths.trim().split(",");
         }
         //拦截器过滤修改************end************************
@@ -66,7 +66,7 @@ public class ReAuthenticationFilter extends AbstractCasFilter {
     @Override
     public void init() {
         super.init();
-        CommonUtils.assertNotNull(this.casServerLoginUrl,"casServerLoginUrl cannot be null.");
+        CommonUtils.assertNotNull(this.casServerLoginUrl, "casServerLoginUrl cannot be null.");
     }
 
     @Override
